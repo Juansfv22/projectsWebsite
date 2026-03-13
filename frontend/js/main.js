@@ -59,9 +59,7 @@ async function loadProjects(){
 
 const createBtn = document.getElementById("createBtn")
 
-if(createBtn){
-
-    createBtn.addEventListener("click", async ()=>{
+createBtn?.addEventListener("click", async ()=>{
 
         const name = document.getElementById("name").value
 
@@ -94,8 +92,6 @@ if(createBtn){
         }   
 
     })
-
-}
 
 
 loadProjects()

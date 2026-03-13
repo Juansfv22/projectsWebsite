@@ -25,17 +25,10 @@ export function setupLog(){
     }
 
     const logoutBtn = document.getElementById("logoutBtn")
-
-    if(logoutBtn){
-
-        logoutBtn.addEventListener("click", ()=>{
-
-            localStorage.removeItem("token")
-            
-            window.location.reload()
-        })
-
-    }
+    logoutBtn?.addEventListener("click", ()=>{
+        localStorage.removeItem("token")
+        window.location.reload()
+    })
 
     return token
 }

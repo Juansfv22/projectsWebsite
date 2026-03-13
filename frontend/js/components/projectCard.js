@@ -2,7 +2,7 @@ export function createProjectCard(project){
     const card = document.createElement("div")
 
     // Agregamos 'flex' y 'items-start' para alinear imagen y texto
-    card.className = "bg-white p-5 rounded-lg shadow hover:shadow-lg transition-all duration-500 cursor-pointer flex gap-4"
+    card.className = "bg-white p-5 rounded-lg shadow hover:shadow-lg transition-all duration-500 flex gap-4"
 
     // Usamos el placeholder si no hay imagen
     const imgSrc = project.image_url || "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
@@ -28,7 +28,7 @@ export function createProjectCard(project){
 
         <a
         href="/frontend/project.html?id=${project.id}"
-        class="text-blue-600 hover:underline"
+        class="text-blue-600 hover:underline cursor-pointer"
         >
         Ver proyecto
         </a>
