@@ -1,9 +1,8 @@
-import { getProject } from "./api/projectApi.js"
+import { deleteProject, getProject, updateProject } from "./api/projectApi.js"
 import { setupLog } from "./setupLog.js"
 
 
 const token = setupLog()
-
 
 function getProjectId(){
 
@@ -22,15 +21,105 @@ async function loadProject(){
 
     const container = document.getElementById("projectContainer")
 
+    const description = project.description ?? "Este proyecto aún no tiene descripción."
+    const imgSrc = project.image_url || "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
+    const attachment = project.attachment ?? "Sin contenido aún."
+
     container.innerHTML = `
-        <h1 class="text-2xl font-bold mb-4">
+        <h1 class="text-2xl sm:text-3xl font-black tracking-tight mb-4">
             ${project.name}
         </h1>
 
-        <p class="text-gray-600">
-            Este proyecto aún no tiene descripción.
+        <div class="w-full mb-4">
+            <img src="${imgSrc}" alt="${project.name}" class="w-full max-h-80 object-cover rounded-2xl shadow-sm ring-1 ring-black/5">
+        </div>
+
+        <p class="text-slate-600 mb-5 leading-relaxed">
+            ${description}
         </p>
+
+        <div class="mb-6">
+            <h2 class="text-sm font-semibold text-slate-700 mb-1">Contenido</h2>
+            <div class="rounded-2xl bg-white/60 border border-white/60 p-4">
+                <p class="text-slate-800 break-words">${attachment}</p>
+            </div>
+        </div>
+
+        ${token ? `
+        <div class="border-t border-white/60 pt-6 mt-6">
+            <h2 class="text-lg font-extrabold tracking-tight mb-4">Opciones de admin</h2>
+
+            <div class="grid grid-cols-1 gap-3">
+                <input id="editName" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Nombre" value="${project.name ?? ""}" />
+                <textarea id="editDescription" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Descripción" rows="3">${project.description ?? ""}</textarea>
+                <input id="editImageUrl" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Image URL" value="${project.image_url ?? ""}" />
+                <input id="editAttachment" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Attachment" value="${project.attachment ?? ""}" />
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 mt-4">
+                <button id="saveBtn" class="bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:from-sky-500 hover:to-fuchsia-500 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
+                    Guardar cambios
+                </button>
+
+                <button id="deleteBtn" class="bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+        ` : ``}
     `
+
+    if (token) {
+        const saveBtn = document.getElementById("saveBtn")
+        const deleteBtn = document.getElementById("deleteBtn")
+
+        saveBtn?.addEventListener("click", async () => {
+            const updates = {
+                name: document.getElementById("editName").value?.trim() || null,
+                description: document.getElementById("editDescription").value?.trim() || null,
+                image_url: document.getElementById("editImageUrl").value?.trim() || null,
+                attachment: document.getElementById("editAttachment").value?.trim() || null,
+            }
+
+            Object.keys(updates).forEach((k) => updates[k] === null && delete updates[k])
+
+            try {
+                await updateProject(id, updates)
+                alert("Cambios guardados con éxito")
+                loadProject()
+            } catch (error) {
+                if (error.status === 401) {
+                    alert("Por favor inicia sesión nuevamente.")
+                    localStorage.removeItem("token")
+                    sessionStorage.setItem("window", window.location.href)
+                    window.location.href = "/frontend/login.html"
+                } else if (error.status === 400) {
+                    alert("Este nombre de proyecto ya existe.")
+                } else {
+                    alert("No se pudo actualizar el proyecto.")
+                }
+            }
+        })
+
+        deleteBtn?.addEventListener("click", async () => {
+            const ok = confirm("¿Seguro que quieres eliminar este proyecto?")
+            if (!ok) return
+
+            try {
+                await deleteProject(id)
+                window.location.href = "/frontend/index.html"
+            } catch (error) {
+                if (error.status === 401) {
+                    alert("Por favor inicia sesión nuevamente.")
+                    localStorage.removeItem("token")
+                    sessionStorage.setItem("window", window.location.href)
+                    window.location.href = "/frontend/login.html"
+                } else {
+                    alert("No se pudo eliminar el proyecto.")
+                }
+            }
+        })
+    }
 }
 
 

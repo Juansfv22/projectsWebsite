@@ -11,20 +11,20 @@ const token = setupLog()
 if(token){
 
     createProjectBox.innerHTML = 
-            `<h2 class="text-lg font-semibold mb-4">
+            `<h2 class="text-lg font-extrabold tracking-tight mb-4">
             Crear nuevo proyecto
             </h2>
 
-            <div class="flex gap-4">
+            <div class="flex flex-col sm:flex-row gap-3">
 
             <input
             id="name"
             placeholder="Nombre del proyecto"
-            class="border p-2 rounded w-full"
+            class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white"
             />
 
             <button id="createBtn"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-2 rounded transition">
+            class="bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:from-sky-500 hover:to-fuchsia-500 text-white px-8 py-3 rounded-xl font-semibold shadow-sm transition">
             Crear
             </button>
 
@@ -59,9 +59,7 @@ async function loadProjects(){
 
 const createBtn = document.getElementById("createBtn")
 
-if(createBtn){
-
-    createBtn.addEventListener("click", async ()=>{
+createBtn?.addEventListener("click", async ()=>{
 
         const name = document.getElementById("name").value
 
@@ -94,8 +92,6 @@ if(createBtn){
         }   
 
     })
-
-}
 
 
 loadProjects()
