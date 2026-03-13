@@ -26,40 +26,42 @@ async function loadProject(){
     const attachment = project.attachment ?? "Sin contenido aún."
 
     container.innerHTML = `
-        <h1 class="text-2xl font-bold mb-4">
+        <h1 class="text-2xl sm:text-3xl font-black tracking-tight mb-4">
             ${project.name}
         </h1>
 
         <div class="w-full mb-4">
-            <img src="${imgSrc}" alt="${project.name}" class="w-full max-h-80 object-cover rounded shadow-sm">
+            <img src="${imgSrc}" alt="${project.name}" class="w-full max-h-80 object-cover rounded-2xl shadow-sm ring-1 ring-black/5">
         </div>
 
-        <p class="text-gray-600 mb-4">
+        <p class="text-slate-600 mb-5 leading-relaxed">
             ${description}
         </p>
 
-        <div class="mb-4">
-            <h2 class="text-sm font-semibold text-gray-700 mb-1">Contenido</h2>
-            <p class="text-gray-700 break-words">${attachment}</p>
+        <div class="mb-6">
+            <h2 class="text-sm font-semibold text-slate-700 mb-1">Contenido</h2>
+            <div class="rounded-2xl bg-white/60 border border-white/60 p-4">
+                <p class="text-slate-800 break-words">${attachment}</p>
+            </div>
         </div>
 
         ${token ? `
-        <div class="border-t pt-4 mt-4">
-            <h2 class="text-lg font-semibold mb-3">Opciones de admin</h2>
+        <div class="border-t border-white/60 pt-6 mt-6">
+            <h2 class="text-lg font-extrabold tracking-tight mb-4">Opciones de admin</h2>
 
             <div class="grid grid-cols-1 gap-3">
-                <input id="editName" class="border p-2 rounded w-full" placeholder="Nombre" value="${project.name ?? ""}" />
-                <textarea id="editDescription" class="border p-2 rounded w-full" placeholder="Descripción" rows="3">${project.description ?? ""}</textarea>
-                <input id="editImageUrl" class="border p-2 rounded w-full" placeholder="Image URL" value="${project.image_url ?? ""}" />
-                <input id="editAttachment" class="border p-2 rounded w-full" placeholder="Attachment" value="${project.attachment ?? ""}" />
+                <input id="editName" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Nombre" value="${project.name ?? ""}" />
+                <textarea id="editDescription" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Descripción" rows="3">${project.description ?? ""}</textarea>
+                <input id="editImageUrl" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Image URL" value="${project.image_url ?? ""}" />
+                <input id="editAttachment" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Attachment" value="${project.attachment ?? ""}" />
             </div>
 
-            <div class="flex gap-3 mt-4">
-                <button id="saveBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition">
+            <div class="flex flex-col sm:flex-row gap-3 mt-4">
+                <button id="saveBtn" class="bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:from-sky-500 hover:to-fuchsia-500 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
                     Guardar cambios
                 </button>
 
-                <button id="deleteBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition">
+                <button id="deleteBtn" class="bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
                     Eliminar
                 </button>
             </div>

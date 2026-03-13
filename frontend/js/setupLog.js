@@ -8,8 +8,8 @@ export function setupLog(){
 
         logBtn.innerHTML = 
                 `<button id="logoutBtn"
-                class="bg-red-500 text-white px-3 py-1 rounded">
-                Logout
+                class="px-4 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 transition shadow-sm">
+                Salir
                 </button>`
 
     } else {
@@ -18,8 +18,8 @@ export function setupLog(){
         
         logBtn.innerHTML = 
                 `<a href="/frontend/login.html"
-                class="bg-white text-blue-600 px-3 py-1 rounded">
-                Admin
+                class="px-4 py-2 rounded-xl font-semibold bg-white/80 hover:bg-white border border-white/60 shadow-sm text-slate-800 transition">
+                Admin ✨
                 </a>`
 
     }
