@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/auth"
+const API_URL = "/auth"
 
 export async function login(username, password){
 

@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/projects"
+const API_URL = "/projects"
 
 export async function getProject(id){
 
