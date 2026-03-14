@@ -17,7 +17,7 @@ export function setupLog(){
         sessionStorage.setItem("window", window.location.href)
         
         logBtn.innerHTML = 
-                `<a href="/frontend/login.html"
+                `<a href="login.html"
                 class="px-4 py-2 rounded-xl font-semibold bg-white/80 hover:bg-white border border-white/60 shadow-sm text-slate-800 transition">
                 Admin ✨
                 </a>`

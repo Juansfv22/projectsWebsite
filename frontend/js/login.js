@@ -7,7 +7,7 @@ function redirect(){
         sessionStorage.removeItem("window")
         window.location.href = redirectUrl
     } else {
-        window.location.href = "/frontend/index.html"
+        window.location.href = "index.html"
     }
 }
 

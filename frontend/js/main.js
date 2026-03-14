@@ -87,7 +87,7 @@ createBtn?.addEventListener("click", async ()=>{
                 alert("Por favor inicia sesión nuevamente.")
                 localStorage.removeItem("token")
                 sessionStorage.setItem("window", window.location.href)
-                window.location.href = "/frontend/login.html"
+                window.location.href = "login.html"
             }
         }   
 

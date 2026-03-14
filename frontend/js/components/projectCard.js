@@ -27,7 +27,7 @@ export function createProjectCard(project){
         </p>
 
         <a
-        href="/frontend/project.html?id=${project.id}"
+        href="project.html?id=${project.id}"
         class="inline-flex items-center gap-2 mt-3 text-sky-700 font-semibold hover:text-fuchsia-700 transition cursor-pointer"
         >
         Ver proyecto <span class="transition-transform group-hover:translate-x-0.5">→</span>

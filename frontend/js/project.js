@@ -92,7 +92,7 @@ async function loadProject(){
                     alert("Por favor inicia sesión nuevamente.")
                     localStorage.removeItem("token")
                     sessionStorage.setItem("window", window.location.href)
-                    window.location.href = "/frontend/login.html"
+                    window.location.href = "login.html"
                 } else if (error.status === 400) {
                     alert("Este nombre de proyecto ya existe.")
                 } else {
@@ -107,13 +107,13 @@ async function loadProject(){
 
             try {
                 await deleteProject(id)
-                window.location.href = "/frontend/index.html"
+                window.location.href = "index.html"
             } catch (error) {
                 if (error.status === 401) {
                     alert("Por favor inicia sesión nuevamente.")
                     localStorage.removeItem("token")
                     sessionStorage.setItem("window", window.location.href)
-                    window.location.href = "/frontend/login.html"
+                    window.location.href = "login.html"
                 } else {
                     alert("No se pudo eliminar el proyecto.")
                 }
