@@ -4,12 +4,13 @@ export function createProjectCard(project){
     // Agregamos 'flex' y 'items-start' para alinear imagen y texto
     card.className = "group bg-white/80 backdrop-blur p-5 rounded-2xl shadow-lg shadow-slate-900/5 border border-white/60 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300 flex gap-4"
 
-    // Usamos el placeholder si no hay imagen
-    const imgSrc = project.image_url || "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
+    // Construimos la ruta de imagen local por id
+    const imgSrc = `/images/image${project.id}.jpg`
 
     card.innerHTML = `
         <div class="flex-shrink-0 w-28 h-20 sm:w-36 sm:h-24">
         <img src="${imgSrc}" alt="${project.name}" 
+        onerror="this.onerror=null;this.src='/images/default.jpg';"
         class="w-full h-full object-cover rounded-xl shadow-sm ring-1 ring-black/5">
         </div>
 

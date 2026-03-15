@@ -8,7 +8,7 @@ export function setupLog(){
 
         logBtn.innerHTML = 
                 `<button id="logoutBtn"
-                class="px-4 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 transition shadow-sm">
+                class="px-4 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 transition shadow-md">
                 Salir
                 </button>`
 
@@ -18,7 +18,7 @@ export function setupLog(){
         
         logBtn.innerHTML = 
                 `<a href="login.html"
-                class="px-4 py-2 rounded-xl font-semibold bg-white/80 hover:bg-white border border-white/60 shadow-sm text-slate-800 transition">
+                class="px-4 py-2 rounded-xl font-semibold bg-slate-900/80 hover:bg-slate-900 border border-slate-700 shadow-sm text-slate-50 transition">
                 Admin ✨
                 </a>`
 

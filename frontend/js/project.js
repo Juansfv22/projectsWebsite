@@ -22,7 +22,7 @@ async function loadProject(){
     const container = document.getElementById("projectContainer")
 
     const description = project.description ?? "Este proyecto aún no tiene descripción."
-    const imgSrc = project.image_url || "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
+    const imgSrc = `/images/image${id}.jpg`
     const attachment = project.attachment ?? "Sin contenido aún."
 
     container.innerHTML = `
@@ -31,7 +31,7 @@ async function loadProject(){
         </h1>
 
         <div class="w-full mb-4">
-            <img src="${imgSrc}" alt="${project.name}" class="w-full max-h-80 object-cover rounded-2xl shadow-sm ring-1 ring-black/5">
+            <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='/images/default.jpg';" class="w-full max-h-80 object-cover rounded-2xl shadow-sm ring-1 ring-black/5">
         </div>
 
         <p class="text-slate-600 mb-5 leading-relaxed">
@@ -52,7 +52,6 @@ async function loadProject(){
             <div class="grid grid-cols-1 gap-3">
                 <input id="editName" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Nombre" value="${project.name ?? ""}" />
                 <textarea id="editDescription" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Descripción" rows="3">${project.description ?? ""}</textarea>
-                <input id="editImageUrl" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Image URL" value="${project.image_url ?? ""}" />
                 <input id="editAttachment" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Attachment" value="${project.attachment ?? ""}" />
             </div>
 
@@ -77,7 +76,6 @@ async function loadProject(){
             const updates = {
                 name: document.getElementById("editName").value?.trim() || null,
                 description: document.getElementById("editDescription").value?.trim() || null,
-                image_url: document.getElementById("editImageUrl").value?.trim() || null,
                 attachment: document.getElementById("editAttachment").value?.trim() || null,
             }
 
