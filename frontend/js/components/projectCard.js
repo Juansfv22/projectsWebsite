@@ -16,15 +16,11 @@ export function createProjectCard(project){
 
         <div class="flex-grow min-w-0">
         <h3 class="text-lg font-extrabold tracking-tight mb-2 truncate">
-            ${project.name}
+        ${project.name}
         </h3>
 
         <p class="text-slate-600 text-sm line-clamp-2">
-            <span class="font-semibold text-slate-700">Descripción:</span> ${project.description || "Sin descripción aún."}
-        </p>
-
-        <p class="text-slate-600 text-sm mt-1">
-            <span class="font-semibold text-slate-700">Contenido:</span> ${project.attachment || "Sin contenido aún."}
+        <span class="font-semibold text-slate-700">Stack:</span> ${project.stack || ""}
         </p>
 
         <a

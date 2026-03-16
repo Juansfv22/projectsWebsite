@@ -6,4 +6,5 @@ class Project(SQLModel, table=True):
     name: str = Field(unique=True)
     description: str | None = None
     image_url: str | None = None
+    stack: str | None = None
     attachment: str | None = None

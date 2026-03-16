@@ -24,46 +24,55 @@ async function loadProject(){
     const description = project.description ?? "Este proyecto aún no tiene descripción."
     const imgSrc = `/images/image${id}.jpg`
     const attachment = project.attachment ?? "Sin contenido aún."
+    const stack = project.stack ?? "Sin stack aún."
 
     container.innerHTML = `
         <h1 class="text-2xl sm:text-3xl font-black tracking-tight mb-4">
-            ${project.name}
+        ${project.name}
         </h1>
 
         <div class="w-full mb-4">
-            <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='/images/default.jpg';" class="w-full max-h-80 object-cover rounded-2xl shadow-sm ring-1 ring-black/5">
+        <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='/images/default.jpg';" class="w-full max-h-80 object-cover rounded-2xl shadow-sm ring-1 ring-black/5">
         </div>
 
         <p class="text-slate-600 mb-5 leading-relaxed">
-            ${description}
+        ${description}
         </p>
 
         <div class="mb-6">
-            <h2 class="text-sm font-semibold text-slate-700 mb-1">Contenido</h2>
-            <div class="rounded-2xl bg-white/60 border border-white/60 p-4">
-                <p class="text-slate-800 break-words">${attachment}</p>
-            </div>
+        <h2 class="text-sm font-semibold text-slate-700 mb-1">stack</h2>
+        <div class="rounded-2xl bg-white/60 border border-white/60 p-4">
+        <p class="text-slate-800 break-words">${stack}</p>
+        </div>
+        </div>
+
+        <div class="mb-6">
+        <h2 class="text-sm font-semibold text-slate-700 mb-1">Contenido</h2>
+        <div class="rounded-2xl bg-white/60 border border-white/60 p-4">
+        <p class="text-slate-800 break-words">${attachment}</p>
+        </div>
         </div>
 
         ${token ? `
         <div class="border-t border-white/60 pt-6 mt-6">
-            <h2 class="text-lg font-extrabold tracking-tight mb-4">Opciones de admin</h2>
+        <h2 class="text-lg font-extrabold tracking-tight mb-4">Opciones de admin</h2>
 
-            <div class="grid grid-cols-1 gap-3">
-                <input id="editName" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Nombre" value="${project.name ?? ""}" />
-                <textarea id="editDescription" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Descripción" rows="3">${project.description ?? ""}</textarea>
-                <input id="editAttachment" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Attachment" value="${project.attachment ?? ""}" />
-            </div>
+        <div class="grid grid-cols-1 gap-3">
+        <input id="editName" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Nombre" value="${project.name ?? ""}" />
+        <textarea id="editDescription" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Descripción" rows="3">${project.description ?? ""}</textarea>
+        <input id="editstack" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="stack" value="${project.stack ?? ""}" />
+        <input id="editAttachment" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Attachment" value="${project.attachment ?? ""}" />
+        </div>
 
-            <div class="flex flex-col sm:flex-row gap-3 mt-4">
-                <button id="saveBtn" class="bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:from-sky-500 hover:to-fuchsia-500 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
-                    Guardar cambios
-                </button>
+        <div class="flex flex-col sm:flex-row gap-3 mt-4">
+        <button id="saveBtn" class="bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:from-sky-500 hover:to-fuchsia-500 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
+        Guardar cambios
+        </button>
 
-                <button id="deleteBtn" class="bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
-                    Eliminar
-                </button>
-            </div>
+        <button id="deleteBtn" class="bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition">
+        Eliminar
+        </button>
+        </div>
         </div>
         ` : ``}
     `
@@ -76,7 +85,13 @@ async function loadProject(){
             const updates = {
                 name: document.getElementById("editName").value?.trim() || null,
                 description: document.getElementById("editDescription").value?.trim() || null,
+                stack: document.getElementById("editstack").value?.trim() || null,
                 attachment: document.getElementById("editAttachment").value?.trim() || null,
+            }
+
+            if (updates.name === null) {
+                alert("Ingresa el nombre del proyecto.")
+                return
             }
 
             Object.keys(updates).forEach((k) => updates[k] === null && delete updates[k])

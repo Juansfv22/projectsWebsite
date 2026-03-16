@@ -10,7 +10,8 @@ const token = setupLog()
 
 if(token){
 
-    createProjectBox.innerHTML = 
+    createProjectBox.classList.remove("hidden")
+    createProjectBox.innerHTML =
             `<h2 class="text-lg font-extrabold tracking-tight mb-4">
             Crear nuevo proyecto
             </h2>
@@ -30,7 +31,6 @@ if(token){
 
             </div>`
     
-    createProjectBox.classList.remove("hidden")
 }
 
 

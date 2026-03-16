@@ -7,7 +7,7 @@ class ProjectCreate(SQLModel):
 class ProjectUpdate(SQLModel):
     name: str | None = None
     description: str | None = None
-    image_url: str | None = None
+    stack: str | None = None
     attachment: str | None = None
 
 
@@ -15,5 +15,5 @@ class ProjectRead(SQLModel):
     id: int
     name: str
     description: str | None
-    image_url: str | None
+    stack: str | None
     attachment: str | None
