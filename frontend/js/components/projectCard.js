@@ -1,10 +1,26 @@
+/**
+ * Project card component module.
+ * 
+ * Creates reusable project card elements for displaying in the projects list.
+ * Each card shows project thumbnail, name, stack, and link to details page.
+ */
+
+/**
+ * Create a project card DOM element.
+ * 
+ * Builds an interactive card displaying project summary information.
+ * Card includes project image (with fallback), name, technology stack, and link to detail page.
+ * Images are loaded from frontend/images/ directory using project ID.
+ */
 export function createProjectCard(project){
     const card = document.createElement("div")
 
-    // Agregamos 'flex' y 'items-start' para alinear imagen y texto
+    // Apply card styling with Tailwind CSS
+    // 'flex' and 'items-start' align image and content side by side
     card.className = "group bg-white/80 backdrop-blur p-5 rounded-2xl shadow-lg shadow-slate-900/5 border border-white/60 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300 flex gap-4"
 
-    // Construimos la ruta de imagen local por id
+    // Build local image path based on project ID
+    // Images should be stored as frontend/images/image{id}.jpg
     const imgSrc = `/images/image${project.id}.jpg`
 
     card.innerHTML = `

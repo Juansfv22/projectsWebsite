@@ -1,9 +1,23 @@
+/**
+ * Project detail page module.
+ * 
+ * Manages the individual project detail page with full project information.
+ * Handles editing and deletion of projects for authenticated admins.
+ * Fetches project data from API and renders dynamic form fields.
+ */
+
 import { deleteProject, getProject, updateProject } from "./api/projectApi.js"
 import { setupLog } from "./setupLog.js"
 
 
+// Check if user is authenticated
 const token = setupLog()
 
+/**
+ * Extract project ID from URL query parameter.
+ * 
+ * Parses the URL to get the 'id' query parameter passed from project list.
+ */
 function getProjectId(){
 
     const params = new URLSearchParams(window.location.search)
@@ -13,6 +27,15 @@ function getProjectId(){
 }
 
 
+/**
+ * Load and display project details.
+ * 
+ * Fetches project from API using ID from URL, then renders:
+ * - Project name, description, image, stack, and attachment
+ * - Admin form with edit and delete buttons (if user is authenticated)
+ * 
+ * Images are loaded from frontend/images/ directory with fallback to default.
+ */
 async function loadProject(){
 
     const id = getProjectId()
@@ -21,6 +44,7 @@ async function loadProject(){
 
     const container = document.getElementById("projectContainer")
 
+    // Use provided values or show placeholder text
     const description = project.description ?? "Este proyecto aún no tiene descripción."
     const imgSrc = `/images/image${id}.jpg`
     const attachment = project.attachment ?? "Sin contenido aún."
@@ -77,10 +101,16 @@ async function loadProject(){
         ` : ``}
     `
 
+    // Setup admin form handlers if user is authenticated
     if (token) {
         const saveBtn = document.getElementById("saveBtn")
         const deleteBtn = document.getElementById("deleteBtn")
 
+        /**
+         * Handle project update.
+         * 
+         * Collects form data, validates, sends update request, and reloads page.
+         */
         saveBtn?.addEventListener("click", async () => {
             const updates = {
                 name: document.getElementById("editName").value?.trim() || null,
@@ -94,6 +124,7 @@ async function loadProject(){
                 return
             }
 
+            // Remove null values to allow partial updates
             Object.keys(updates).forEach((k) => updates[k] === null && delete updates[k])
 
             try {
@@ -114,6 +145,11 @@ async function loadProject(){
             }
         })
 
+        /**
+         * Handle project deletion.
+         * 
+         * Confirms deletion with user, sends delete request, and redirects to homepage.
+         */
         deleteBtn?.addEventListener("click", async () => {
             const ok = confirm("¿Seguro que quieres eliminar este proyecto?")
             if (!ok) return
@@ -136,4 +172,5 @@ async function loadProject(){
 }
 
 
+// Load project details on page load
 loadProject()

@@ -1,13 +1,24 @@
+/**
+ * Portfolio homepage module.
+ * 
+ * Manages the main portfolio page displaying projects list and admin controls.
+ * Handles project creation, loading, and error handling.
+ * Shows authentication status and renders project cards dynamically.
+ */
+
 import { getProjects, createProject } from "./api/projectsApi.js"
 import { createProjectCard } from "./components/projectCard.js"
 import { setupLog } from "./setupLog.js"
 
+// DOM elements
 const container = document.getElementById("projectsContainer")
 const createProjectBox = document.getElementById("createProjectBox")
 
+// Check if user is authenticated
 const token = setupLog()
 
 
+// Show project creation form only to authenticated users
 if(token){
 
     createProjectBox.classList.remove("hidden")
@@ -34,6 +45,12 @@ if(token){
 }
 
 
+/**
+ * Load and display all projects from the database.
+ * 
+ * Fetches projects from API, clears container, and renders each project as a card.
+ * Adds smooth fade-in animation to cards as they appear.
+ */
 async function loadProjects(){
 
     container.innerHTML = ""
@@ -44,10 +61,12 @@ async function loadProjects(){
 
         const card = createProjectCard(project)
 
+        // Add initial animation classes
         card.classList.add("opacity-0","translate-y-4")
 
         container.appendChild(card)
 
+        // Trigger animation on next frame
         setTimeout(()=>{
             card.classList.remove("opacity-0","translate-y-4")
         },50)
@@ -57,6 +76,7 @@ async function loadProjects(){
 }
 
 
+// Setup create project button handler
 const createBtn = document.getElementById("createBtn")
 
 createBtn?.addEventListener("click", async ()=>{
@@ -69,21 +89,23 @@ createBtn?.addEventListener("click", async ()=>{
         }
 
         try{
-
+            // Send project creation request to backend
             await createProject({
                 name
             })
 
+            // Clear input and reload projects list
             document.getElementById("name").value = ""
             loadProjects()
 
         }catch (error){
-
+            // Handle different error cases
             if (error.status === 400){
                 alert("Este nombre de proyecto ya existe.")
             }
 
             else if (error.status === 401){
+                // Token expired or invalid
                 alert("Por favor inicia sesión nuevamente.")
                 localStorage.removeItem("token")
                 sessionStorage.setItem("window", window.location.href)
@@ -94,4 +116,5 @@ createBtn?.addEventListener("click", async ()=>{
     })
 
 
+// Load projects on page load
 loadProjects()

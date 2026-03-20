@@ -1,5 +1,17 @@
+/**
+ * Individual project API client module.
+ * 
+ * Handles API calls for fetching, updating, and deleting specific projects.
+ * Communicates with the backend /projects/{id} endpoint.
+ */
+
 const API_URL = "/projects"
 
+/**
+ * Fetch a single project by ID.
+ * 
+ * Public endpoint - no authentication required.
+ */
 export async function getProject(id){
 
     const response = await fetch(API_URL + "/" + id)
@@ -8,6 +20,11 @@ export async function getProject(id){
 
 }
 
+/**
+ * Update an existing project.
+ * 
+ * Requires JWT authentication. Updates specified fields (partial updates supported).
+ */
 export async function updateProject(id, projectUpdates) {
     const token = localStorage.getItem("token")
 
@@ -29,6 +46,11 @@ export async function updateProject(id, projectUpdates) {
     return await response.json()
 }
 
+/**
+ * Delete a project.
+ * 
+ * Requires JWT authentication. Permanently removes project from database.
+ */
 export async function deleteProject(id) {
     const token = localStorage.getItem("token")
 
