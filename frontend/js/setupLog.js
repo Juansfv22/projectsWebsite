@@ -35,10 +35,9 @@ export function setupLog(){
         
         logBtn.innerHTML = 
                 `<a href="login.html"
-                class="px-4 py-2 rounded-xl font-semibold bg-slate-900/80 hover:bg-slate-900 border border-slate-700 shadow-sm text-slate-50 transition">
-                Admin ✨
+                class="px-2 py-2 rounded-xl font-semibold text-back-blue transition">
+                👤
                 </a>`
-
     }
 
     // Setup logout button handler if user is authenticated

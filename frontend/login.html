@@ -8,44 +8,53 @@
 <title>Admin Login</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'back-blue': '#051830',
+                    'main-text': '#cad0db',
+                    'details-green': '#20B2AA'
+                },
+            },
+        },
+    }
+</script>
 
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-sky-100 via-emerald-50 to-fuchsia-100 flex items-center justify-center px-4 text-slate-900">
+<body class="min-h-screen bg-back-blue flex items-center justify-center px-4 text-main-text">
 
-<div class="w-full max-w-sm bg-white/80 backdrop-blur p-8 rounded-2xl shadow-lg shadow-slate-900/5 border border-white/60">
+<div class="w-full max-w-sm bg-white/80 backdrop-blur p-8 rounded-2xl shadow-lg shadow-slate-900/5 border-4 border-details-green">
 
-<div class="flex items-center justify-center mb-5">
-<div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-sky-500 to-fuchsia-500 shadow-sm"></div>
-</div>
-
-<h1 class="text-2xl font-black tracking-tight mb-1 text-center">
-Admin
+<h1 class="text-2xl font-semibold tracking-tight mb-1 text-center text-back-blue">
+ADMIN
 </h1>
 <p class="text-sm text-slate-600 text-center mb-6">
-Inicia sesión para editar y eliminar proyectos.
+Inicia sesión para gestionar proyectos.
 </p>
 
 <input
 id="username"
 placeholder="Usuario"
-class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full mb-3 bg-white"
+class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full mb-3 bg-white text-black"
 />
 
 <input
 id="password"
 type="password"
-placeholder="Password"
-class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full mb-4 bg-white"
+placeholder="Contraseña"
+class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full mb-4 bg-white text-black"
 />
 
 <button id="loginBtn"
-class="w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:from-sky-500 hover:to-fuchsia-500 transition">
+class="w-full py-3 rounded-xl font-semibold text-white bg-details-green hover:bg-details-green/70 transition">
 Entrar
 </button>
 
 <button id="cancelBtn"
-class="w-full py-3 rounded-xl font-semibold text-slate-700 bg-white/80 hover:bg-white border border-white/60 shadow-sm transition">
+class="w-full py-3 rounded-xl font-semibold text-slate-700 border border-white/60 hover:bg-white/20 transition">
 Cancelar
 </button>
 

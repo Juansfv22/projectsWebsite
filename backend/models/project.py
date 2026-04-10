@@ -18,12 +18,12 @@ class Project(SQLModel, table=True):
         name: Project name (required, must be unique)
         description: Detailed description of the project (optional)
         image_url: URL to project image or screenshot (optional, currently local images)
-        stack: Technologies used in the project as string (optional)
+        Stack: Technologies used in the project as string (optional)
         attachment: Additional content or resources (optional)
     """
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(unique=True)  # Project names must be unique
     description: str | None = None
     image_url: str | None = None
-    stack: str | None = None
+    Stack: str | None = None
     attachment: str | None = None
