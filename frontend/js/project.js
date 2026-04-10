@@ -31,7 +31,7 @@ function getProjectId(){
  * Load and display project details.
  * 
  * Fetches project from API using ID from URL, then renders:
- * - Project name, description, image, stack, and attachment
+ * - Project name, description, image, Stack, and attachment
  * - Admin form with edit and delete buttons (if user is authenticated)
  * 
  * Images are loaded from frontend/images/ directory with fallback to default.
@@ -46,35 +46,30 @@ async function loadProject(){
 
     // Use provided values or show placeholder text
     const description = project.description ?? "Este proyecto aún no tiene descripción."
-    const imgSrc = `/images/image${id}.jpg`
-    const attachment = project.attachment ?? "Sin contenido aún."
-    const stack = project.stack ?? "Sin stack aún."
+    const imgSrc = `/images/image${id}.png`
+    const attachment = project.attachment?.replace(/^https?:\/\//, "") ?? "Sin contenido aún."
+    const Stack = project.Stack ?? "Sin Stack aún."
 
     container.innerHTML = `
-        <h1 class="text-2xl sm:text-3xl font-black tracking-tight mb-4">
+        <h1 class="text-2xl sm:text-3xl font-black tracking-tight mb-4 text-back-blue">
         ${project.name}
         </h1>
 
         <div class="w-full mb-4">
-        <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='/images/default.jpg';" class="w-full max-h-80 object-cover rounded-2xl shadow-sm ring-1 ring-black/5">
+        <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='/images/default.png';" class="w-full h-full object-contain rounded-2xl">
         </div>
 
-        <p class="text-slate-600 mb-5 leading-relaxed">
+        <p class="text-slate-800 mb-5 leading-relaxed whitespace-pre-line">
         ${description}
         </p>
 
         <div class="mb-6">
-        <h2 class="text-sm font-semibold text-slate-700 mb-1">stack</h2>
-        <div class="rounded-2xl bg-white/60 border border-white/60 p-4">
-        <p class="text-slate-800 break-words">${stack}</p>
-        </div>
+        <h2 class="text-sm font-semibold text-details-green mb-1">Stack</h2>
+        <p class="text-slate-800 break-words">${Stack}</p>
         </div>
 
         <div class="mb-6">
-        <h2 class="text-sm font-semibold text-slate-700 mb-1">Contenido</h2>
-        <div class="rounded-2xl bg-white/60 border border-white/60 p-4">
-        <p class="text-slate-800 break-words">${attachment}</p>
-        </div>
+        <a href="https://${attachment}" target="_blank" class="text-xl font-semibold text-details-green mb-1 hover:text-back-blue transition">View on GitHub →</a>
         </div>
 
         ${token ? `
@@ -84,7 +79,7 @@ async function loadProject(){
         <div class="grid grid-cols-1 gap-3">
         <input id="editName" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Nombre" value="${project.name ?? ""}" />
         <textarea id="editDescription" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Descripción" rows="3">${project.description ?? ""}</textarea>
-        <input id="editstack" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="stack" value="${project.stack ?? ""}" />
+        <input id="editStack" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Stack" value="${project.Stack ?? ""}" />
         <input id="editAttachment" class="border border-slate-200 focus:border-sky-400 focus:ring-4 focus:ring-sky-200/60 outline-none p-3 rounded-xl w-full bg-white" placeholder="Attachment" value="${project.attachment ?? ""}" />
         </div>
 
@@ -115,7 +110,7 @@ async function loadProject(){
             const updates = {
                 name: document.getElementById("editName").value?.trim() || null,
                 description: document.getElementById("editDescription").value?.trim() || null,
-                stack: document.getElementById("editstack").value?.trim() || null,
+                Stack: document.getElementById("editStack").value?.trim() || null,
                 attachment: document.getElementById("editAttachment").value?.trim() || null,
             }
 
