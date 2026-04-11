@@ -1,20 +1,20 @@
 # Projects Portfolio Website
 
-A personal projects portfolio web application built with FastAPI, SQLite and frontend with Tailwind CSS. This app allows users to view a collection of projects, while authenticated admins can create, update, and delete project entries.
+A personal projects portfolio web application built with FastAPI, PostgreSQL and frontend with Tailwind CSS. This app allows users to view a collection of projects, while authenticated admins can create, update, and delete project entries.
 
 ## Features
 
 - **Project Management**: CRUD operations for projects (Create, Read, Update, Delete)
 - **Authentication**: JWT-based login for admin access to manage projects
 - **Responsive Frontend**: Modern UI built with Tailwind CSS
-- **SQLite Database**: Lightweight database for storing project data
+- **PostgreSQL**: Serverless database for storing project data
 - **SQLModel ORM**: Database management using OOP
 - **CORS Support**: Configured for cross-origin requests
 - **Static File Serving**: Frontend served directly from the backend
 
 ## Tech Stack
 
-- **Backend**: FastAPI, SQLModel, SQLite
+- **Backend**: FastAPI, SQLModel, PostgreSQL
 - **Authentication**: Python-Jose for JWT tokens
 - **Frontend**: HTML, CSS (Tailwind CSS), JavaScript
 - **Server**: Uvicorn ASGI server
@@ -94,8 +94,7 @@ projectsWebsite/
 │   │   ├── api/               # API client functions
 │   │   └── components/        # Reusable components
 │   └── images/                # Static images
-├── database/                  # Database files (auto-created)
-├── private/                   # Private notes/files
+├── .env                       # Environment variables
 ├── run.py                     # Application entry point
 ├── requirements.txt           # Python dependencies
 └── README.md                  # This file
