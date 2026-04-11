@@ -2,7 +2,7 @@
 
 This module initializes and configures the FastAPI application with:
 - CORS (Cross-Origin Resource Sharing) middleware for cross-origin requests
-- SQLite database setup with SQLModel ORM
+- PostgreSQL database setup with SQLModel ORM
 - Authentication and project management routers
 - Static file serving for the frontend
 
@@ -31,7 +31,7 @@ async def lifespan(app: FastAPI):
 
 # Initialize FastAPI application with metadata and lifecycle management
 app = FastAPI(title="Mi Portfolio de Proyectos", 
-              description="API para gestionar proyectos utilizando FastAPI y base de datos SQLite con SQLModel", 
+              description="API para gestionar proyectos utilizando FastAPI y base de datos PostgreSQL con SQLModel", 
               lifespan=lifespan)
 
 # Configure CORS middleware to allow requests from any origin

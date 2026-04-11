@@ -5,14 +5,7 @@ __pycache__/
 *$py.class
 .pytest_cache/
 
-# --- Base de Datos (SQLite) ---
-# Ignoramos el archivo de base de datos para que no se suban tus datos de prueba
-database/database.db
-*.db
-*.sqlite3
-
 # --- Seguridad y Configuración ---
-# ¡CRÍTICO! Aquí están tus SECRET_KEY y contraseñas
 .env
 
 # --- Entornos Virtuales ---

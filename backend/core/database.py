@@ -1,22 +1,26 @@
 """Database configuration and session management.
 
-This module handles SQLite database initialization and provides
+This module manages PostgreSQL database initialization and provides
 dependency injection for database sessions throughout the application.
 """
 
 from sqlmodel import SQLModel, create_engine, Session
+from ..core.config import settings
 
-# SQLite database URL pointing to database/database.db file
-sqlite_url = "sqlite:///database/database.db"
+# Load database URL from environment variable
+database_url = settings.DATABASE_URL
 
-# Create database engine with SQLite connection
-engine = create_engine(sqlite_url)
+# Create database engine with PostgreSQL connection
+engine = create_engine(
+        database_url,
+        pool_pre_ping=True,  # Enable connection pool pre-ping to check connections before use
+        pool_recycle=300)  # Recycle connections after 5 minutes to prevent stale connections
 
 
 def create_db_and_tables():
     """Initialize database and create all required tables.
     
-    Creates the SQLite database file and all tables defined in SQLModel
+    Creates the PostgreSQL database and all tables defined in SQLModel
     models if they don't already exist.
     """
     SQLModel.metadata.create_all(engine)

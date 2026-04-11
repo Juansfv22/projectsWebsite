@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     ADMIN_USERNAME: str
     ADMIN_PASSWORD: str
     SECRET_KEY: str
+    DATABASE_URL: str
     TOKEN_EXPIRE_MINUTES: int = 10
 
     class Config:
