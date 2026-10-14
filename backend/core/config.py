@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     All settings should be configured before running the application.
     """
     
-    ADMIN_USERNAME: str
+    ADMIN_USERNAME: str 
     ADMIN_PASSWORD: str
     SECRET_KEY: str
     DATABASE_URL: str

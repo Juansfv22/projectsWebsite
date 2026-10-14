@@ -6,7 +6,7 @@ Handles database interactions and error handling for project management.
 
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
-from sqlmodel import Session, select
+from sqlmodel import Session, select, col
 from ..models.project import Project
 
 
@@ -37,7 +37,7 @@ def list_projects(session: Session):
     
     Fetches all projects from the database.
     """
-    statement = select(Project)
+    statement = select(Project).order_by(col(Project.id).asc())
     return session.exec(statement).all()
 
 

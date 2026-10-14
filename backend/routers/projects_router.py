@@ -53,16 +53,8 @@ def get_project(project_id: int, session: Session = Depends(get_session)):
     return get_project_by_id(session, project_id)
     
 
-@router.patch(
-    "/{project_id}",
-    dependencies=[Depends(verify_token)],
-    response_model=ProjectRead,
-)
-def edit_project(
-    project_id: int,
-    project: ProjectUpdate,
-    session: Session = Depends(get_session),
-):
+@router.patch("/{project_id}", dependencies=[Depends(verify_token)], response_model=ProjectRead)
+def edit_project(project_id: int, project: ProjectUpdate, session: Session = Depends(get_session)):
     """Update an existing project.
     
     Requires JWT authentication. Updates specified fields of a project.
@@ -71,11 +63,7 @@ def edit_project(
     return update_project(session, project_id, project)
 
 
-@router.delete(
-    "/{project_id}",
-    dependencies=[Depends(verify_token)],
-    status_code=status.HTTP_204_NO_CONTENT,
-)
+@router.delete("/{project_id}", dependencies=[Depends(verify_token)], status_code=status.HTTP_204_NO_CONTENT)
 def remove_project(project_id: int, session: Session = Depends(get_session)):
     """Delete a project.
     

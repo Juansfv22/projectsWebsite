@@ -64,12 +64,12 @@ async function loadProject(){
         </p>
 
         <div class="mb-6">
-        <h2 class="text-sm font-semibold text-details-green mb-1">Stack</h2>
+        <h2 class="text-md font-courier font-bold text-details-green mb-1">Stack</h2>
         <p class="text-slate-800 break-words">${Stack}</p>
         </div>
 
         <div class="mb-6">
-        <a href="https://${attachment}" target="_blank" class="text-xl font-semibold text-details-green mb-1 hover:text-back-blue transition">View on GitHub →</a>
+        <a href="https://${attachment}" target="_blank" class="text-xl font-courier font-extrabold text-details-green mb-1 hover:text-back-blue transition">Ver en GitHub →</a>
         </div>
 
         ${token ? `

@@ -1,7 +1,7 @@
 const socialData = [
   {
     name: 'Email',
-    url: 'mailto:juanse3222@gmail.com',
+    url: 'mailto:juansfernandezv22@gmail.com',
     iconName: 'mail',
   },
   {
@@ -21,7 +21,7 @@ const socialData = [
   },
   {
     name: 'CV',
-    url: 'https://drive.google.com/file/d/1nZDcrz8cYlm0-0_cA9MUNNNeyU3yEYFH/view?usp=sharing',
+    url: 'https://drive.google.com/file/d/1RVwfQoQ6U8BCUDhuuNBnKoTKiDIwQiBl/view?usp=sharing',
     iconName: 'resume',
   }
 ]
